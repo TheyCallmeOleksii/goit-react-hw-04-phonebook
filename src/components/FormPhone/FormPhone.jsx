@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import css from './FormPhone.module.css';
 
-export const FormPhone = ({ handleContact }) => {
+export const FormPhone = ({ handleContact, contacts }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -15,6 +15,15 @@ export const FormPhone = ({ handleContact }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
+
+    const isContactExist = contacts.some(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
+
+    if (isContactExist) {
+      alert(`${name} is already in contacts!`);
+      return;
+    }
 
     handleContact(name, number);
 

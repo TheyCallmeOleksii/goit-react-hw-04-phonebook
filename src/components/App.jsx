@@ -29,7 +29,11 @@ export const App = () => {
   }, [contacts]);
 
   const handleContact = (name, number) => {
-    if (contacts.some(contact => contact.name === name)) {
+    const isContactExist = contacts.some(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
+
+    if (isContactExist) {
       alert(`${name} is already in contacts!`);
       return;
     }
@@ -69,7 +73,7 @@ export const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
-      <FormPhone handleContact={handleContact} />
+      <FormPhone handleContact={handleContact} contacts={contacts} />
 
       <h2>Contacts</h2>
       <Filter filter={filter} onChange={onhandleChangeFilter} />
